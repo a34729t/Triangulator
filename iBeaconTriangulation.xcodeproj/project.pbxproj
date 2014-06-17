@@ -24,7 +24,7 @@
 		260C1FCC194E6EA30006A45E /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C1FCB194E6EA30006A45E /* Utils.m */; };
 		260C1FD0194E76A70006A45E /* EstimoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C1FCF194E76A70006A45E /* EstimoteView.m */; };
 		260C1FD3194EABF60006A45E /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C1FD2194EABF60006A45E /* GridView.m */; };
-		260C1FD5194EB7430006A45E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 260C1FD4194EB7430006A45E /* README.md */; };
+		260C1FD719509A6E0006A45E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 260C1FD619509A6E0006A45E /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +63,7 @@
 		260C1FCF194E76A70006A45E /* EstimoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimoteView.m; sourceTree = "<group>"; };
 		260C1FD1194EABF60006A45E /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
 		260C1FD2194EABF60006A45E /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
-		260C1FD4194EB7430006A45E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		260C1FD619509A6E0006A45E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +93,7 @@
 		260C1F86194E49AF0006A45E = {
 			isa = PBXGroup;
 			children = (
+				260C1FD619509A6E0006A45E /* README.md */,
 				260C1F98194E49AF0006A45E /* iBeaconTriangulation */,
 				260C1FBA194E49AF0006A45E /* iBeaconTriangulationTests */,
 				260C1F91194E49AF0006A45E /* Frameworks */,
@@ -123,7 +124,6 @@
 		260C1F98194E49AF0006A45E /* iBeaconTriangulation */ = {
 			isa = PBXGroup;
 			children = (
-				260C1FD4194EB7430006A45E /* README.md */,
 				260C1FCD194E6EAB0006A45E /* UI */,
 				260C1F99194E49AF0006A45E /* Supporting Files */,
 			);
@@ -256,7 +256,7 @@
 			files = (
 				260C1FAE194E49AF0006A45E /* Images.xcassets in Resources */,
 				260C1FA6194E49AF0006A45E /* Main_iPhone.storyboard in Resources */,
-				260C1FD5194EB7430006A45E /* README.md in Resources */,
+				260C1FD719509A6E0006A45E /* README.md in Resources */,
 				260C1F9D194E49AF0006A45E /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +488,7 @@
 				260C1FC6194E49AF0006A45E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		260C1FC7194E49AF0006A45E /* Build configuration list for PBXNativeTarget "iBeaconTriangulationTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +497,7 @@
 				260C1FC9194E49AF0006A45E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
