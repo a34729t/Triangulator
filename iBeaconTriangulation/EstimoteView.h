@@ -13,6 +13,7 @@
 @property(nonatomic, strong) UILabel *coordinateLabel;
 @property(nonatomic) int step;
 @property(nonatomic) CGPoint lastLocation;
+@property(nonatomic, readonly) CGPoint center;
 
 - (id)initWithFrame:(CGRect)frame image:(UIImage *)image step:(int)step;
 - (void)setCoordinates:(CGPoint)point;
