@@ -11,11 +11,14 @@
 
 @implementation EstimoteView
 
-- (id)initWithFrame:(CGRect)frame image:(UIImage *)image step:(int)step
+- (id)initWithFrame:(CGRect)frame image:(UIImage *)image step:(int)step major:(NSString *)major minor:(NSString *)minor
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.major = major;
+        self.minor = minor;
         self.step = step;
+        self.proximity = CLProximityUnknown;
         
         UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(detectPan:)];
         self.gestureRecognizers = @[panRecognizer];

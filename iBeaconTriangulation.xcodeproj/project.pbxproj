@@ -25,6 +25,7 @@
 		260C1FD0194E76A70006A45E /* EstimoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C1FCF194E76A70006A45E /* EstimoteView.m */; };
 		260C1FD3194EABF60006A45E /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C1FD2194EABF60006A45E /* GridView.m */; };
 		260C1FD719509A6E0006A45E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 260C1FD619509A6E0006A45E /* README.md */; };
+		260C1FDB19515EC40006A45E /* BeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C1FDA19515EC40006A45E /* BeaconManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,9 @@
 		260C1FD1194EABF60006A45E /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
 		260C1FD2194EABF60006A45E /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
 		260C1FD619509A6E0006A45E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
+		260C1FD919515EC40006A45E /* BeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconManager.h; sourceTree = "<group>"; };
+		260C1FDA19515EC40006A45E /* BeaconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconManager.m; sourceTree = "<group>"; };
+		260C1FDC195163AD0006A45E /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				260C1FCD194E6EAB0006A45E /* UI */,
+				260C1FD819515E930006A45E /* iBeacon */,
 				260C1F99194E49AF0006A45E /* Supporting Files */,
 			);
 			path = iBeaconTriangulation;
@@ -178,6 +183,16 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		260C1FD819515E930006A45E /* iBeacon */ = {
+			isa = PBXGroup;
+			children = (
+				260C1FD919515EC40006A45E /* BeaconManager.h */,
+				260C1FDA19515EC40006A45E /* BeaconManager.m */,
+				260C1FDC195163AD0006A45E /* Config.h */,
+			);
+			name = iBeacon;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -225,6 +240,13 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Nicolas Flacco";
 				TargetAttributes = {
+					260C1F8E194E49AF0006A45E = {
+						SystemCapabilities = {
+							com.apple.iOS = {
+								enabled = 0;
+							};
+						};
+					};
 					260C1FB2194E49AF0006A45E = {
 						TestTargetID = 260C1F8E194E49AF0006A45E;
 					};
@@ -279,6 +301,7 @@
 				260C1FAC194E49AF0006A45E /* ViewController.m in Sources */,
 				260C1FA3194E49AF0006A45E /* AppDelegate.m in Sources */,
 				260C1FD0194E76A70006A45E /* EstimoteView.m in Sources */,
+				260C1FDB19515EC40006A45E /* BeaconManager.m in Sources */,
 				260C1F9F194E49AF0006A45E /* main.m in Sources */,
 				260C1FD3194EABF60006A45E /* GridView.m in Sources */,
 				260C1FCC194E6EA30006A45E /* Utils.m in Sources */,
@@ -411,6 +434,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iBeaconTriangulation/iBeaconTriangulation-Prefix.pch";
 				INFOPLIST_FILE = "iBeaconTriangulation/iBeaconTriangulation-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -424,6 +448,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iBeaconTriangulation/iBeaconTriangulation-Prefix.pch";
 				INFOPLIST_FILE = "iBeaconTriangulation/iBeaconTriangulation-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
