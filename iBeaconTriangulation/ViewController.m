@@ -112,11 +112,13 @@
     CGPoint marker = [self updateLocationMarker];
     self.markerView.frame = CGRectMake(marker.x, marker.y - (133/6), 150/3, 133/3);
     [self.view addSubview:self.markerView];
+    
+    [self checkIfBluetoothOff]; // Could be moved to check when view appears
 }
 
 #pragma mark - BeaconManager Delegate Methods
 
--(void)discoveredBeaconWithMajor:(NSString *)major minor:(NSString *)minor proximity:(CLProximity)proximity
+- (void)discoveredBeaconWithMajor:(NSString *)major minor:(NSString *)minor proximity:(CLProximity)proximity
 {
 //    // debug
 //    NSString *distance;
@@ -142,6 +144,52 @@
     // Update markerView
     CGPoint marker = [self updateLocationMarker];
     self.markerView.frame = CGRectMake(marker.x, marker.y - (133/6), 150/3, 133/3);
+}
+
+#pragma mark - Button Delegates
+
+- (void)menuButtonClicked:(id)sender
+{
+    // Switch edit mode
+    self.editMode = !self.editMode;
+    
+    // Change color of button
+    if (self.editMode) {
+        [self.menuButton setImage:MENU_IMG_ON forState:UIControlStateNormal];
+    } else {
+        [self.menuButton setImage:MENU_IMG_OFF forState:UIControlStateNormal];
+    }
+    
+    // Change grid alpha
+    if (self.editMode) {
+        self.grid.alpha = 0.6;
+    } else {
+        self.grid.alpha = 0.25;
+    }
+    
+    // Change state of estimotes to draggable or not
+    for(EstimoteView *estimote in self.iBeacons) {
+        estimote.userInteractionEnabled = !estimote.userInteractionEnabled;
+        estimote.coordinateLabel.hidden = !estimote.coordinateLabel.hidden;
+    }
+}
+
+- (void)scanButtonClicked:(id)sender
+{
+    NSLog(@"scanButtonClicked");
+    
+    self.scanMode = !self.scanMode;
+    
+    // Change color of button
+    if (self.scanMode) {
+        [self.scanButton setImage:SCAN_IMG_OFF forState:UIControlStateNormal];
+        [self.beaconManager stop];
+        self.beaconManager.delegate = nil;
+    } else {
+        [self.scanButton setImage:SCAN_IMG_ON forState:UIControlStateNormal];
+        [self.beaconManager start];
+        self.beaconManager.delegate = self;
+    }
 }
 
 #pragma mark - Marker Helpers
@@ -183,7 +231,7 @@
         }
     }
     
-//    NSLog(@"Updated (%d,%d)", xTotal/xCount, yTotal/yCount); // debug
+    //    NSLog(@"Updated (%d,%d)", xTotal/xCount, yTotal/yCount); // debug
     return CGPointMake(xTotal/xCount, yTotal/yCount);
 }
 
@@ -239,48 +287,18 @@
     return button;
 }
 
-- (void)menuButtonClicked:(id)sender
-{
-    // Switch edit mode
-    self.editMode = !self.editMode;
-    
-    // Change color of button
-    if (self.editMode) {
-        [self.menuButton setImage:MENU_IMG_ON forState:UIControlStateNormal];
-    } else {
-        [self.menuButton setImage:MENU_IMG_OFF forState:UIControlStateNormal];
-    }
-    
-    // Change grid alpha
-    if (self.editMode) {
-        self.grid.alpha = 0.6;
-    } else {
-        self.grid.alpha = 0.25;
-    }
-    
-    // Change state of estimotes to draggable or not
-    for(EstimoteView *estimote in self.iBeacons) {
-        estimote.userInteractionEnabled = !estimote.userInteractionEnabled;
-        estimote.coordinateLabel.hidden = !estimote.coordinateLabel.hidden;
-    }
-}
+#pragma mark - Other
 
-- (void)scanButtonClicked:(id)sender
+- (void)checkIfBluetoothOff
 {
-    NSLog(@"scanButtonClicked");
-    
-    self.scanMode = !self.scanMode;
-    
-    // Change color of button
-    if (self.scanMode) {
-        [self.scanButton setImage:SCAN_IMG_OFF forState:UIControlStateNormal];
-        [self.beaconManager stop];
-        self.beaconManager.delegate = nil;
-    } else {
-        [self.scanButton setImage:SCAN_IMG_ON forState:UIControlStateNormal];
-        [self.beaconManager start];
-        self.beaconManager.delegate = self;
-    }
+    // If bluetooth is off, the system will pop up an alert view which will offer the choice to turn bluetooth on
+    // See: http://stackoverflow.com/a/11550848/581135
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:FALSE], CBCentralManagerScanOptionAllowDuplicatesKey, nil];
+    NSMutableArray * discoveredPeripherals = [NSMutableArray new];
+    CBCentralManager * manager = [[CBCentralManager alloc] initWithDelegate:nil queue:nil];
+    [manager scanForPeripheralsWithServices:discoveredPeripherals options:options];
+    [manager stopScan];
+    manager = nil;
 }
 
 - (void)didReceiveMemoryWarning

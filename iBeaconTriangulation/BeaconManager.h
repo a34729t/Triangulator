@@ -16,7 +16,7 @@
 
 @protocol BeaconManagerDelegate <NSObject>
 
--(void)discoveredBeaconWithMajor:(NSString *)major minor:(NSString *)minor proximity:(CLProximity)proximity;
+- (void)discoveredBeaconWithMajor:(NSString *)major minor:(NSString *)minor proximity:(CLProximity)proximity;
 
 @end
 
