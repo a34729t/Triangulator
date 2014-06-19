@@ -20,6 +20,7 @@
         self.step = step;
         self.proximity = CLProximityUnknown;
         
+        // Gesture recognizer
         UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(detectPan:)];
         self.gestureRecognizers = @[panRecognizer];
 
@@ -44,8 +45,6 @@
     self.coordinateLabel.text = [NSString stringWithFormat:@"(%d,%d)", (int)point.x/self.step, (int)point.y/self.step];
 }
 
-#pragma mark - Detect gestures
-
 - (void) detectPan:(UIPanGestureRecognizer *) uiPanGestureRecognizer
 {
     // Remember the original position
@@ -63,22 +62,22 @@
         [self setCoordinates:self.center];
     } else {
         // Snap to grid
-        CGPoint newcenter = self.center;
-        newcenter.x = self.step * floor((newcenter.x / self.step) + 0.5);
-        newcenter.y = self.step * floor((newcenter.y / self.step) + 0.5);
+        CGPoint newCenter = self.center;
+        newCenter.x = self.step * floor((newCenter.x / self.step) + 0.5);
+        newCenter.y = self.step * floor((newCenter.y / self.step) + 0.5);
         
         [UIView animateWithDuration:0.1f
                               delay:0.f
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
-                             self.center = newcenter;
+                             self.center = newCenter;
                          }
                          completion:nil];
         
-        self.center = newcenter;
+        self.center = newCenter;
         [self setCoordinates:self.center];
         
-        NSLog(@"endPan (%f,%f)", newcenter.x, newcenter.y);
+        NSLog(@"endPan (%f,%f)", newCenter.x, newCenter.y);
     }
 }
 

@@ -7,7 +7,7 @@
 @interface GridView ()
 
 @property (nonatomic, assign) CGFloat gridWidth;
-@property (nonatomic, assign) int numberOfColumns;
+@property (nonatomic, assign) int columns;
 
 @end
 
@@ -18,11 +18,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        
         // Set size of grid
         self.gridWidth = 0.5;
-        self.numberOfColumns = columns-1;
+        self.columns = columns-1;
         
         // Set view to be transparent
         self.opaque = NO;
@@ -38,14 +36,14 @@
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     
     // Calculate basic dimensions
-    CGFloat columnWidth = self.frame.size.width / (self.numberOfColumns + 1.0);
+    CGFloat columnWidth = self.frame.size.width / (self.columns + 1.0);
     CGFloat rowHeight = columnWidth;
     int numberOfRows = self.frame.size.height/rowHeight;
     
     // ---------------------------
     // Drawing column lines
     // ---------------------------
-    for(int i = 1; i <= self.numberOfColumns; i++)
+    for(int i = 1; i <= self.columns; i++)
     {
         CGPoint startPoint = CGPointMake(columnWidth * i, 0.0f);
         CGPoint endPoint  = CGPointMake(startPoint.x, self.frame.size.height);
