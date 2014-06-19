@@ -22,10 +22,9 @@
 @interface ViewController () <BeaconManagerDelegate>
 
 // Class properties
+@property (nonatomic, strong) BeaconManager *beaconManager;
 @property (nonatomic) BOOL editMode; // Change locations of iBeacons
 @property (nonatomic) BOOL scanMode; // Start scanning
-@property (nonatomic, strong) UIPanGestureRecognizer *panRecognizer;
-@property (nonatomic, strong) BeaconManager *beaconManager;
 
 // iBeacons
 @property (nonatomic, strong) EstimoteView *blueEstimote;
@@ -35,9 +34,9 @@
 
 // UI
 @property (nonatomic, strong) GridView *grid;
+@property (nonatomic, strong) UIImageView *markerView;
 @property (nonatomic, strong) UIButton *menuButton;
 @property (nonatomic, strong) UIButton *scanButton;
-@property (nonatomic, strong) UIImageView *markerView;
 
 @end
 
@@ -106,7 +105,7 @@
     [scanButton addTarget:self action:@selector(scanButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     self.scanButton = scanButton;
 
-    // Make a location marker
+    // Make location marker
     UIImage *markerImage = [Utils filledImageFrom:[UIImage imageNamed:@"locationIcon"] withColor:[UIColor blackColor]];
     self.markerView = [[UIImageView alloc] initWithImage:markerImage];
     CGPoint marker = [self updateLocationMarker];
