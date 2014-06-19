@@ -6,8 +6,8 @@
 
 @interface GridView ()
 
+@property (nonatomic, assign) CGFloat gridWidth;
 @property (nonatomic, assign) int numberOfColumns;
-@property (nonatomic, assign) int numberOfRows;
 
 @end
 
@@ -21,6 +21,7 @@
         // Initialization code
         
         // Set size of grid
+        self.gridWidth = 0.5;
         self.numberOfColumns = columns-1;
         
         // Set view to be transparent
@@ -33,28 +34,21 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.5);
+    CGContextSetLineWidth(context, self.gridWidth);
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
+    
+    // Calculate basic dimensions
+    CGFloat columnWidth = self.frame.size.width / (self.numberOfColumns + 1.0);
+    CGFloat rowHeight = columnWidth;
+    int numberOfRows = self.frame.size.height/rowHeight;
     
     // ---------------------------
     // Drawing column lines
     // ---------------------------
-    
-    // calculate column width
-    CGFloat columnWidth = self.frame.size.width / (self.numberOfColumns + 1.0);
-    
-    
-    
     for(int i = 1; i <= self.numberOfColumns; i++)
     {
-        CGPoint startPoint;
-        CGPoint endPoint;
-        
-        startPoint.x = columnWidth * i;
-        startPoint.y = 0.0f;
-        
-        endPoint.x = startPoint.x;
-        endPoint.y = self.frame.size.height;
+        CGPoint startPoint = CGPointMake(columnWidth * i, 0.0f);
+        CGPoint endPoint  = CGPointMake(startPoint.x, self.frame.size.height);
         
         CGContextMoveToPoint(context, startPoint.x, startPoint.y);
         CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
@@ -64,21 +58,10 @@
     // ---------------------------
     // Drawing row lines
     // ---------------------------
-    
-    // calclulate row height
-    CGFloat rowHeight = columnWidth;
-    self.numberOfRows = self.frame.size.height/rowHeight;
-    
-    for(int j = 1; j <= self.numberOfRows; j++)
+    for(int j = 1; j <= numberOfRows; j++)
     {
-        CGPoint startPoint;
-        CGPoint endPoint;
-        
-        startPoint.x = 0.0f;
-        startPoint.y = rowHeight * j;
-        
-        endPoint.x = self.frame.size.width;
-        endPoint.y = startPoint.y;
+        CGPoint startPoint = CGPointMake(0.0f, rowHeight * j);
+        CGPoint endPoint  = CGPointMake(self.frame.size.width, startPoint.y);
         
         CGContextMoveToPoint(context, startPoint.x, startPoint.y);
         CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
